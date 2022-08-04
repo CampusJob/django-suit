@@ -1,6 +1,28 @@
 from django import forms
-from django.forms import Textarea, TextInput, ClearableFileInput
+from django.forms import Textarea, TextInput, ClearableFileInput, Select
 from django.utils.safestring import mark_safe
+
+
+class HTML5Input(TextInput):
+    """
+    Supports any HTML5 input
+    http://www.w3schools.com/html/html5_form_input_types.asp
+    """
+
+    def __init__(self, attrs=None, input_type=None):
+        self.input_type = input_type
+        super(HTML5Input, self).__init__(attrs)
+
+
+#
+class LinkedSelect(Select):
+    """
+    Linked select - Adds link to foreign item, when used with foreign key field
+    """
+
+    def __init__(self, attrs=None, choices=()):
+        attrs = _make_attrs(attrs, classes="linked-select")
+        super(LinkedSelect, self).__init__(attrs, choices)
 
 
 class AutosizedTextarea(Textarea):
@@ -17,7 +39,7 @@ class AutosizedTextarea(Textarea):
         return forms.Media(js=('suit/js/autosize.min.js',))
 
     def render(self, name, value, attrs=None, renderer=None):
-        output = super(AutosizedTextarea, self).render(name, value, attrs,renderer)
+        output = super(AutosizedTextarea, self).render(name, value, attrs, renderer)
         output += mark_safe(
             "<script type=\"text/javascript\">django.jQuery(function () { autosize(document.getElementById('id_%s')); });</script>"
             % name)
@@ -39,7 +61,7 @@ class CharacterCountTextarea(AutosizedTextarea):
 
 class ImageWidget(ClearableFileInput):
     def render(self, name, value, attrs=None, renderer=None):
-        html = super(ImageWidget, self).render(name, value, attrs,renderer)
+        html = super(ImageWidget, self).render(name, value, attrs, renderer)
         if not value or not hasattr(value, 'url') or not value.url:
             return html
         html = u'<div class="ImageWidget"><div class="float-xs-left">' \
