@@ -1,13 +1,5 @@
 import django
 
-
-try:
-    # Python 3.
-    from urllib.parse import parse_qs
-except ImportError:
-    # Python 2.6+
-    from urlparse import
-
 try:
     from importlib import import_module
 except ImportError:  # python = 2.6
@@ -29,3 +21,10 @@ if django.VERSION[:2] < (1, 8):
     tpl_context_class = Context
 else:
     tpl_context_class = dict
+
+try:
+    # Python 3.
+    from urllib.parse import parse_qs
+except ImportError:
+    # Python 2.6+
+    from urlparse import
