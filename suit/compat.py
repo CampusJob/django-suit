@@ -4,3 +4,8 @@ try:
 except ImportError:
     # Python 2.6+
     from urlparse import parse_qs
+
+try:
+    from django.template.defaulttags import url
+except ImportError:
+    from django.templatetags.future import url
