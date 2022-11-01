@@ -2,7 +2,23 @@
 /*! Bootstrap v4.0.0-alpha.5 (https://getbootstrap.com) Copyright 2011-2016 The Bootstrap Authors Copyright 2011-2016 Twitter, Inc. Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE) */
 /*! normalize.css v4.2.0 | MIT License | github.com/necolas/normalize.css */
 html { font-family: sans-serif; line-height: 1.15; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+.main {
+  width: 100%;
+}
+#changelist {
+  display: grid;
+  grid-template-areas: "list filter";
+  grid-auto-columns: 5fr 1fr;
+}
 
+.changelist-form-container {
+  grid-area: list;
+}
+#changelist #changelist-filter {
+  margin-left: auto;
+  margin-top: 6px;
+  grid-area: filter;
+}
 body { margin: 0; }
 
 article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary { display: block; }
