@@ -113,9 +113,6 @@ class MenuManager(object):
         """
         Make dictionary of native apps and models for easier matching
         """
-        if not self.available_apps:
-            return
-        
         for native_app in self.available_apps:
             app_key = native_app['app_url'].split('/')[-2]
             self._available_apps['apps'][app_key] = native_app
@@ -144,9 +141,6 @@ class MenuManager(object):
 
     def build_menu_by_available_apps(self):
         menu_items = []
-        if not self.available_apps:
-            return
-        
         for native_app in self.available_apps:
             parent_item = self.make_parent_from_native_app(native_app)
             menu_items.append(parent_item)
