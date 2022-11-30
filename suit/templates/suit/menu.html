@@ -4,7 +4,7 @@
 {% with suit_layout='layout'|suit_conf:request %}
     <div id="suit-nav">
         <ul>
-            {% if menu and menu|length > 0 %}
+            {% if menu %}
                 {% for parent_item in menu %}
                     {% if not parent_item.align_right or suit_layout == 'vertical' %}
                         {% include 'suit/menu_item.html' %}
