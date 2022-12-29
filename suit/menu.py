@@ -6,7 +6,7 @@ except ImportError:
     from django.utils.translation import ugettext_lazy as _
 
 
-class ChildItem:
+class ChildItem(object):
     def __init__(self, label=None, model=None, url=None, target_blank=False, permissions=None):
         self.label = label
         self.model = model
@@ -39,7 +39,7 @@ class ParentItem(ChildItem):
         return self.app
 
 
-class MenuManager:
+class MenuManager(object):
     def __init__(self, available_apps, context, request):
         from .config import get_config_instance, get_current_app
 
@@ -117,9 +117,6 @@ class MenuManager:
         """
         Make dictionary of native apps and models for easier matching
         """
-        if self.available_apps is None:
-            return
-
         for native_app in self.available_apps:
             app_key = native_app['app_url'].split('/')[-2]
             self._available_apps['apps'][app_key] = native_app
@@ -148,8 +145,6 @@ class MenuManager:
 
     def build_menu_by_available_apps(self):
         menu_items = []
-        if self.available_apps is None:
-            return
         for native_app in self.available_apps:
             parent_item = self.make_parent_from_native_app(native_app)
             menu_items.append(parent_item)
